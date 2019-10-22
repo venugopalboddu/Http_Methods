@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row"> 
+        <div class="col-md-7 offset-md-3">  
+<h5>Http Methods | Get | Post | Put | Delete</h5>
+<form [formGroup]="form" class="form-group" (ngSubmit)="onSubmit()">
+   <div class="form-group">
+    <label><b>Firstname:</b></label>
+    <input type="text" formControlName="fname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fname.errors }">
+    <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+        <div *ngIf="f.fname.errors.required">First Name is required</div>
+    </div>
+    </div>
+    <div class="form-group">
+    <label><b>Lastname:</b></label>
+    <input type="text" formControlName="lname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }">
+    <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+        <div *ngIf="f.lname.errors.required">Last Name is required</div>
+    </div>
+    </div>
+    <button class="btn btn-primary">Submit</button>&nbsp;
+    <button type="submit" (click)="up()" class="btn btn-primary">Update</button>
+</form><br>
+<div class="search-hero">
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching...">
+</div><br>
+<table class="table" border="1">
+    <tr>
+        <th>Id</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let d of fdata | filter:searchText">
+        <td>{{d.id}}</td>
+        <td>{{d.fname}}</td>
+        <td>{{d.lname}}</td>
+        <td>
+                <button type="submit" (click)="ed(d)" class="btn btn-primary">Edit</button>&nbsp;
+                <button type="submit" (click)="del(d)" class="btn btn-primary">Delete</button>&nbsp;
+                <button type="submit" (click)="openModa(d)" class="btn btn-primary"  data-toggle="modal" data-target="#myModal">View</button>
+        </td>
+    </tr>
+</table>
+</div>
+  </div>
+  <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Details</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+                    <h4>Id:   {{emplye.id}}</h4>
+                    <h4>Firstname: {{emplye.fname}}</h4>
+                    <h4>Lastname: {{emplye.lname}}</h4>
+            </div>
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+</div>
+
